@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于this的指向的问题 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 面向对象立即执行函数表达式将函数表达式直接加上()进行调用。tip: 只要函数能被当做表达式，就可以直接加()调用写法：  (function(){})() (funciton(){}())  function(){}()    function(){}()   ! function(){}() ~ function(){}() ^ function(){}()  沙箱模式一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于this的指向的问题">
+<meta property="og:url" content="http://yoursite.com/2015/06/30/关于this的指向的问题/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JavaScript 面向对象立即执行函数表达式将函数表达式直接加上()进行调用。tip: 只要函数能被当做表达式，就可以直接加()调用写法：  (function(){})() (funciton(){}())  function(){}()    function(){}()   ! function(){}() ~ function(){}() ^ function(){}()  沙箱模式一">
+<meta property="og:updated_time" content="2017-06-29T17:13:29.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于this的指向的问题">
+<meta name="twitter:description" content="JavaScript 面向对象立即执行函数表达式将函数表达式直接加上()进行调用。tip: 只要函数能被当做表达式，就可以直接加()调用写法：  (function(){})() (funciton(){}())  function(){}()    function(){}()   ! function(){}() ~ function(){}() ^ function(){}()  沙箱模式一">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-关于this的指向的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/30/关于this的指向的问题/" class="article-date">
+  <time datetime="2015-06-29T17:10:02.000Z" itemprop="datePublished">2015-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于this的指向的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript-面向对象"><a href="#JavaScript-面向对象" class="headerlink" title="JavaScript 面向对象"></a>JavaScript 面向对象</h1><h2 id="立即执行函数表达式"><a href="#立即执行函数表达式" class="headerlink" title="立即执行函数表达式"></a>立即执行函数表达式</h2><p>将函数表达式直接加上()进行调用。<br>tip: 只要函数能被当做表达式，就可以直接加()调用<br>写法：</p>
+<ul>
+<li>(function(){})()</li>
+<li>(funciton(){}())</li>
+<li><ul>
+<li>function(){}()</li>
+</ul>
+</li>
+<li><ul>
+<li>function(){}()</li>
+</ul>
+</li>
+<li>! function(){}()</li>
+<li>~ function(){}()</li>
+<li>^ function(){}()</li>
+</ul>
+<h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><p>一个隔离的环境<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window</span>)</span>&#123;</div><div class="line">	<span class="comment">//变量的声明</span></div><div class="line"></div><div class="line">	<span class="comment">//功能代码</span></div><div class="line"></div><div class="line">	<span class="comment">//如果需要，就通过window对象向外界暴露接口</span></div><div class="line">	<span class="comment">//window.jQuery = window.$ = jQuery</span></div><div class="line">&#125;)(<span class="built_in">window</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="传参的目的"><a href="#传参的目的" class="headerlink" title="传参的目的"></a>传参的目的</h3><ol>
+<li>为了实现逻辑上的隔离，沙箱内部不使用外部的内容，外部也不使用沙箱内部的内容</li>
+<li>便于代码压缩，因为内置对象无法被压缩，如果使用传参的方式，便可以压缩掉自己定义的这个形参</li>
+</ol>
+<h3 id="沙箱模式的用途"><a href="#沙箱模式的用途" class="headerlink" title="沙箱模式的用途"></a>沙箱模式的用途</h3><ol>
+<li>框架</li>
+<li>类库</li>
+<li>插件</li>
+<li>组件</li>
+</ol>
+<h2 id="数组的方法"><a href="#数组的方法" class="headerlink" title="数组的方法"></a>数组的方法</h2><ol>
+<li><p>forEach</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">数组.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, arr</span>)</span>&#123;</div><div class="line">	</div><div class="line">&#125;)</div><div class="line"><span class="comment">//遍历数组，遍历到每个元素的时候，都会调用这个回调函数，</span></div><div class="line"><span class="comment">//value： 当前正在遍历的元素</span></div><div class="line"><span class="comment">//index: 当前正在遍历的元素的索引</span></div><div class="line"><span class="comment">//arr； 当前正在遍历的数组对象</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">数组.map(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, arr</span>)</span>&#123;</div><div class="line">	</div><div class="line">&#125;)</div><div class="line"><span class="comment">//遍历数组，遍历到每个元素的时候，都会调用这个回调函数，</span></div><div class="line"><span class="comment">//value： 当前正在遍历的元素</span></div><div class="line"><span class="comment">//index: 当前正在遍历的元素的索引</span></div><div class="line"><span class="comment">//arr； 当前正在遍历的数组对象</span></div><div class="line"></div><div class="line"><span class="comment">//map方法有返回值：</span></div><div class="line"><span class="comment">//每次调用回到函数，都会产生一个返回值，将所有调用返回的返回值组合成一个新的数组，就是map方法的返回值了</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>filter</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">数组.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, arr</span>)</span>&#123;</div><div class="line">	</div><div class="line">&#125;)</div><div class="line"><span class="comment">//遍历数组，遍历到每个元素的时候，都会调用这个回调函数，如果回调函数返回的是true，则当前元素会被加入到返回值数组当中</span></div><div class="line"></div><div class="line"><span class="comment">//value： 当前正在遍历的元素</span></div><div class="line"><span class="comment">//index: 当前正在遍历的元素的索引</span></div><div class="line"><span class="comment">//arr； 当前正在遍历的数组对象</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="函数的四种调用模式"><a href="#函数的四种调用模式" class="headerlink" title="函数的四种调用模式"></a>函数的四种调用模式</h2><ol>
+<li><p>函数调用模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">函数名();</div><div class="line"><span class="comment">//this ---&gt; window</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>方法调用模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">对象名.方法名();</div><div class="line">对象名[方法名]();</div><div class="line"><span class="comment">//this ---&gt; 调用该方法的对象</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数调用模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> 函数名();</div><div class="line"><span class="comment">//this ---&gt; new创建出来的对象</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>上下文调用模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">函数名.call();</div><div class="line">函数名.apply();</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="上下文调用模式"><a href="#上下文调用模式" class="headerlink" title="上下文调用模式"></a>上下文调用模式</h2><p>上下文调用模式中可以改变函数中this的指向！</p>
+<h3 id="call"><a href="#call" class="headerlink" title="call"></a>call</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">函数名.call(obj, arg1...argN);</div><div class="line"><span class="comment">//1. 调用该函数</span></div><div class="line"><span class="comment">//2. 将函数中的this指向obj</span></div><div class="line"><span class="comment">//3. 将call方法的第二个及以后所有的实参，依次传递给函数作为实参</span></div></pre></td></tr></table></figure>
+<h3 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">函数名.apply(obj, 数组或者伪数组);</div><div class="line"><span class="comment">//1. 调用该函数</span></div><div class="line"><span class="comment">//2. 将函数中的this指向obj</span></div><div class="line"><span class="comment">//3. 将第二个参数中的数组或者伪数组中的元素，拆解开依次传递给函数作为实参</span></div></pre></td></tr></table></figure>
+<h3 id="上下文调用模式的应用"><a href="#上下文调用模式的应用" class="headerlink" title="上下文调用模式的应用"></a>上下文调用模式的应用</h3><ol>
+<li>伪数组转数组</li>
+<li>数组求最大值</li>
+<li>借用方法</li>
+</ol>
+<h2 id="创建对象的两种模式"><a href="#创建对象的两种模式" class="headerlink" title="创建对象的两种模式"></a>创建对象的两种模式</h2><ol>
+<li><p>工厂模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line">	obj.name = <span class="string">""</span>;</div><div class="line">	obj.age = <span class="number">18</span>;</div><div class="line">	<span class="keyword">return</span> obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//this---&gt;window  因为调用模式是函数调用模式</span></div><div class="line"><span class="keyword">var</span> p = Person();</div></pre></td></tr></table></figure>
+</li>
+<li><p>寄生模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line">	obj.name = <span class="string">""</span>;</div><div class="line">	obj.age = <span class="number">18</span>;</div><div class="line">	<span class="keyword">return</span> obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//this---&gt;new创建出来的对象  因为调用模式是构造函数调用模式</span></div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h2><p>严格模式如何开启<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span></div><div class="line"><span class="meta">'use strict'</span></div></pre></td></tr></table></figure></p>
+<h3 id="严格模式的特征"><a href="#严格模式的特征" class="headerlink" title="严格模式的特征"></a>严格模式的特征</h3><ol>
+<li>声明变量必须使用var</li>
+<li>函数的形参不可以重名</li>
+<li>ES6之前 对象的属性名不可以重名</li>
+<li>eval函数有自己的作用域</li>
+<li>不允许使用8进制数字</li>
+</ol>
+<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可以为对象添加属性，并且设置属性的特性</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, propName, descriptor);</div><div class="line"><span class="comment">//descriptor对象的属性说明</span></div><div class="line">	<span class="comment">//writable： 设置属性是否可以被赋值，默认为false</span></div><div class="line">	<span class="comment">//configurable: 设置属性是否可以被删除，默认为false</span></div><div class="line">	<span class="comment">//enumerable: 设置属性是否可以被遍历，默认为false</span></div><div class="line">	<span class="comment">//value: 设置属性的值（默认值）</span></div><div class="line">	<span class="comment">//get set: 属性的设置器和获取器 两个方法，分别会在属性被赋值和取值的时候，被系统自动调用，不能和writable和value同时存在！</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/30/关于this的指向的问题/" data-id="cj4j4l9kz0000zstubw7igrdk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/30/模块化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          模块化
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/30/模块化/">模块化</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/30/关于this的指向的问题/">关于this的指向的问题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
