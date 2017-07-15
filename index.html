@@ -128,7 +128,7 @@
                             
                                 <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
                             
-                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                                <a class="fl github" target="_blank" href="https://github.com/huchanghao" title="github">github</a>
                             
                                 <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
                             
@@ -210,7 +210,7 @@
                     
                         <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
                     
-                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                        <a class="github" target="_blank" href="https://github.com/huchanghao" title="github">github</a>
                     
                         <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
                     
@@ -228,6 +228,88 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-闭包" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/15/闭包/" class="article-date">
+      <time datetime="2017-07-15T00:10:02.000Z" itemprop="datePublished">2017-07-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/15/闭包/">关于闭包</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>闭包指的就是那些能够访问独立的变量的函数！</p>
+<h3 id="闭包要解决的问题"><a href="#闭包要解决的问题" class="headerlink" title="闭包要解决的问题"></a>闭包要解决的问题</h3><p>函数中声明的变量不能被函数外部直接使用</p>
+<h3 id="闭包的基本模型"><a href="#闭包的基本模型" class="headerlink" title="闭包的基本模型"></a>闭包的基本模型</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> data = <span class="string">""</span>;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="comment">//操作data</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> inner;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用闭包设置和获取变量的值"><a href="#使用闭包设置和获取变量的值" class="headerlink" title="使用闭包设置和获取变量的值"></a>使用闭包设置和获取变量的值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> data = <span class="string">""</span>;</div><div class="line">	<span class="keyword">var</span> obj = &#123;</div><div class="line">		<span class="attr">setData</span>: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</div><div class="line">			data = value;</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">getData</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> data;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="闭包的原理"><a href="#闭包的原理" class="headerlink" title="闭包的原理"></a>闭包的原理</h3><p>就是作用域的访问规则！</p>
+<h3 id="闭包的作用"><a href="#闭包的作用" class="headerlink" title="闭包的作用"></a>闭包的作用</h3><ol>
+<li>给函数提供一个私有的变量</li>
+<li>保护变量，给变量的设置提供专有的渠道，在这个渠道中可以添加一些校验的逻辑</li>
+</ol>
+<h3 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h3><ol>
+<li>for循环中注册点击事件的问题</li>
+<li>for循环中setTimeout的问题</li>
+</ol>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><ol>
+<li>浏览器缓存</li>
+<li>CDN</li>
+<li>硬件缓存</li>
+</ol>
+<h3 id="缓存封装"><a href="#缓存封装" class="headerlink" title="缓存封装"></a>缓存封装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCache</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> cache = &#123;&#125;;</div><div class="line">	<span class="keyword">var</span> keys = [];</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(value)&#123;</div><div class="line">			cache[key] = value;</div><div class="line">			<span class="keyword">if</span>(keys.push(key) &gt; <span class="number">20</span>)&#123;</div><div class="line">				<span class="keyword">delete</span>[keys.shift()];</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">return</span> cache[key];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="jQuery缓存源码"><a href="#jQuery缓存源码" class="headerlink" title="jQuery缓存源码"></a>jQuery缓存源码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCache</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> keys = [];</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">cache</span>(<span class="params">key, value</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(keys.push(key + <span class="string">" "</span>) &gt; <span class="number">20</span>)&#123;</div><div class="line">			<span class="keyword">delete</span> cache[keys.shift()];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> (cache[key + <span class="string">" "</span>] = value);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="递归实现的斐波那契数列存在的性能问题"><a href="#递归实现的斐波那契数列存在的性能问题" class="headerlink" title="递归实现的斐波那契数列存在的性能问题"></a>递归实现的斐波那契数列存在的性能问题</h2><p>由于存在大量的重复的计算，所以导致在40多之后，就算不出来了</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li>提供一个缓存，用这个缓存来存储计算出来的数据</li>
+<li>每次在计算的时候，首先先从缓存中去获取,如果有，就直接返回</li>
+<li>如果没有，就通过递归的方式去计算</li>
+<li>计算出来之后，一定要记着保存到缓存中去，以便下次使用</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCache</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> cache = &#123;&#125;;</div><div class="line">	<span class="keyword">var</span> keys = [];</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(value)&#123;</div><div class="line">			cache[key] = value;</div><div class="line">			<span class="keyword">if</span>(keys.push(key) &gt; <span class="number">20</span>)&#123;</div><div class="line">				<span class="keyword">delete</span>[keys.shift()];</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">return</span> cache[key];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> cache = createCache();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> num = cache(n);</div><div class="line">	<span class="keyword">if</span>(!num)&#123;</div><div class="line">		<span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</div><div class="line">			num = <span class="number">1</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			num = fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>);</div><div class="line">		&#125;</div><div class="line">		cache(n, num);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> num;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="w-模块化" class="article article-type-w" itemscope itemprop="blogPost">
   
@@ -256,7 +338,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="博学谷-第5天"><a href="#博学谷-第5天" class="headerlink" title="博学谷 第5天"></a>博学谷 第5天</h1><h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><p>js代码的模块化标准，不适用于前端开发，NodeJS在使用该标准实现模块化</p>
+        <h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><p>js代码的模块化标准，不适用于前端开发，NodeJS在使用该标准实现模块化</p>
 <h3 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h3><p>Async Module Definition 异步模块定义</p>
 <p>尽可能早的加载所有需要用到的模块，模块的加载都是异步的，如果要在模块加载完成后，利用模块中的内容实现某些功能，需要将代码写在 require的第二个参数的回调函数中</p>
 <p>require.js  </p>
